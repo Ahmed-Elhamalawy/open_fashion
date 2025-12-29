@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:open_fashion/components/custom_bottom_tab_bar.dart'; // Import your custom app bar
+import 'package:open_fashion/components/custom_bottom_tab_bar.dart';
 import 'package:open_fashion/screens/add_card.dart';
 import 'package:open_fashion/screens/adress.dart';
 import 'package:open_fashion/screens/cart.dart';
 import 'package:open_fashion/screens/chechout.dart';
+import 'package:open_fashion/screens/favorite.dart';
 import 'package:open_fashion/screens/home.dart';
+import 'package:open_fashion/screens/product_details.dart';
 import 'route_names.dart';
 
 class AppRouter {
@@ -35,6 +37,10 @@ class AppRouter {
             path: RouteNames.home,
             builder: (context, state) => const Home(),
           ),
+          GoRoute(
+            path: RouteNames.favorite,
+            builder: (context, state) => const Favorite(),
+          ),
         ],
       ),
       //  Routes without app bar
@@ -54,6 +60,14 @@ class AppRouter {
       GoRoute(
         path: RouteNames.addCard,
         builder: (context, state) => const AddCard(),
+      ),
+      GoRoute(
+        name: RouteNames.productDetails, // ✅ assign a name
+        path: '/productDetails/:id', // ✅ define path with :id
+        builder: (context, state) {
+          final id = state.pathParameters['id']!;
+          return ProductDetails(id: id);
+        },
       ),
     ],
   );

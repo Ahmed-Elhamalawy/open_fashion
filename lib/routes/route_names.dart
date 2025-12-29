@@ -4,4 +4,6 @@ class RouteNames {
   static const String checkout = '/checkout';
   static const String adress = '/adress';
   static const String addCard = '/add-card';
+  static const String favorite = '/favorite';
+  static const String productDetails = '/productDetails';
 }

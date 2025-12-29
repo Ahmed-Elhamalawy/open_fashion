@@ -9,7 +9,12 @@ class CustomBottomTabBar extends StatelessWidget {
 
   int _currentIndex(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
-    if (location.startsWith(RouteNames.home)) return 0;
+
+    if (location == '/favorite') return 2;
+    if (location == '/profile') return 3;
+    if (location == '/grid') return 1;
+    if (location == '/') return 0;
+
     return 0;
   }
 
@@ -45,12 +50,12 @@ class CustomBottomTabBar extends StatelessWidget {
           ),
           TabItem(
             icon: Ionicons.heart,
-            active: currentIndex == 1,
-            onTap: () {},
+            active: currentIndex == 2,
+            onTap: () => context.go(RouteNames.favorite),
           ),
           TabItem(
             icon: Ionicons.person,
-            active: currentIndex == 1,
+            active: currentIndex == 3,
             onTap: () {},
           ),
         ],

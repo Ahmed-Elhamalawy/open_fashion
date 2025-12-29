@@ -35,76 +35,55 @@ class _ProductCardState extends State<ProductCard> {
           Stack(
             children: [
               // Product Image
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  widget.product.image,
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+              Image.network(
+                widget.product.image,
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.contain,
               ),
 
               // Cart button
               Positioned(
-                top: 10,
-                right: 10,
-                child: GestureDetector(
-                  onTap: () {
+                top: 5,
+                right: 5,
+                child: IconButton.filled(
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.white24,
+                    shadowColor: Colors.black.withOpacity(0.4),
+                    elevation: 5,
+                  ),
+                  icon: const Icon(
+                    Ionicons.cart,
+                    size: 25,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
                     cartNotifier.addCartItem(widget.product);
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.grey, width: 2),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.4),
-                          blurRadius: 5,
-                          offset: const Offset(1, 1),
-                        ),
-                      ],
-                    ),
-                    child: const Icon(
-                      Ionicons.cart,
-                      size: 30,
-                      color: Colors.grey,
-                    ),
-                  ),
                 ),
               ),
 
               // Favorite button
               Positioned(
-                top: 10,
-                left: 10,
-                child: GestureDetector(
-                  onTap: () {
-                    favoriteProvider
-                        .toggleFav(widget.product); // Or your favorite logic
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.grey, width: 2),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.4),
-                          blurRadius: 5,
-                          offset: const Offset(1, 1),
-                        ),
-                      ],
-                    ),
-                    child: Icon(
-                      Ionicons.heart,
-                      size: 30,
-                      color: context
-                              .watch<FavoriteProvider>()
-                              .isFav(widget.product)
-                          ? Colors.red
-                          : Colors.grey,
-                    ),
+                top: 5,
+                left: 5,
+                child: IconButton.filled(
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.white24,
+                    shadowColor: Colors.black.withOpacity(0.4),
+                    elevation: 5,
                   ),
+                  icon: Icon(
+                    Ionicons.heart,
+                    size: 25,
+                    color:
+                        context.watch<FavoriteProvider>().isFav(widget.product)
+                            ? Colors.red
+                            : Colors.white,
+                  ),
+                  onPressed: () {
+                    favoriteProvider.toggleFav(widget.product);
+                  },
                 ),
               )
             ],

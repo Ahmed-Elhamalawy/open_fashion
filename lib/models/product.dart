@@ -5,6 +5,7 @@ class Product {
   final String description;
   final String category;
   final String image;
+  // final Rating? rating;
 
   Product({
     required this.id,
@@ -13,6 +14,7 @@ class Product {
     required this.description,
     required this.category,
     required this.image,
+    // this.rating,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,8 @@ class Product {
       description: json['description'],
       category: json['category'],
       image: json['image'],
+      // rating:
+      // Rating(rate: json['rating']['rate'], count: json['rating']['count']),
     );
   }
 
@@ -34,3 +38,10 @@ class Product {
   @override
   int get hashCode => id.hashCode;
 }
+
+// class Rating {
+//   final double rate;
+//   final double count;
+
+//   Rating({required this.rate, required this.count});
+// }

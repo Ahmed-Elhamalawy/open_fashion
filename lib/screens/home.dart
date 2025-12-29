@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:open_fashion/components/custom_app_bar.dart';
 import 'package:open_fashion/components/header.dart';
@@ -10,6 +11,7 @@ import 'package:open_fashion/components/shimmer_grid.dart';
 import 'package:open_fashion/core/colors.dart';
 import 'package:open_fashion/models/product.dart';
 import 'package:open_fashion/providers/cart_provider.dart';
+import 'package:open_fashion/routes/route_names.dart';
 import 'package:open_fashion/services/products.dart';
 import 'package:provider/provider.dart';
 
@@ -100,14 +102,14 @@ class _HomeState extends State<Home> {
                 /// Cover Image
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.asset('assets/cover/cover3.png'),
+                  child: Image.asset('assets/images/cover3.png'),
                 ),
                 const Gap(15),
 
-                const Center(child: Header(title: 'Products')),
+                const Center(child: Header(title: 'Explore All Products')),
                 Center(
                   child: Image.asset(
-                    'assets/svgs/line.png',
+                    'assets/images/line.png',
                     width: 200,
                   ),
                 ),
@@ -143,7 +145,14 @@ class _HomeState extends State<Home> {
                     ),
                     itemBuilder: (context, index) {
                       final item = filteredProducts[index];
-                      return ProductCard(product: item);
+                      return GestureDetector(
+                          onTap: () {
+                            context.goNamed(
+                              RouteNames.productDetails,
+                              pathParameters: {'id': item.id.toString()},
+                            );
+                          },
+                          child: ProductCard(product: item));
                     },
                   ),
 

@@ -17,7 +17,6 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     // 🔹 Optimized reads
     final uniqueItems = context.watch<CartProvider>().groupedItems;
-
     final totalPrice = context.select<CartProvider, double>(
       (cart) => cart.totalPrice,
     );
@@ -135,6 +134,7 @@ class Cart extends StatelessWidget {
                                           ),
                                         ],
                                       ),
+
                                       const Gap(12),
 
                                       /// Price
