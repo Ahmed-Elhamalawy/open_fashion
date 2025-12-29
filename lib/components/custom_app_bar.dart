@@ -77,7 +77,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               if (onIconTap != null) {
                 onIconTap!();
               } else {
-                context.push(RouteNames.cart);
+                context.go(RouteNames.cart);
               }
             },
             child: SizedBox(

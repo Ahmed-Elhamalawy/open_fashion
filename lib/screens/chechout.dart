@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -11,24 +10,25 @@ import 'package:open_fashion/components/custome-text.dart';
 import 'package:open_fashion/components/footer_btn.dart';
 import 'package:open_fashion/components/header.dart';
 import 'package:open_fashion/components/label.dart';
-import 'package:open_fashion/providers/cart_provider.dart';
 import 'package:open_fashion/routes/route_names.dart';
+import 'package:provider/provider.dart';
+import 'package:open_fashion/providers/cart_provider.dart';
 
-class Chechout extends ConsumerStatefulWidget {
+class Chechout extends StatefulWidget {
   const Chechout({
     super.key,
   });
 
   @override
-  ConsumerState<Chechout> createState() => _ChechoutState();
+  State<Chechout> createState() => _ChechoutState();
 }
 
-class _ChechoutState extends ConsumerState<Chechout> {
+class _ChechoutState extends State<Chechout> {
   Map<String, dynamic>? addressData;
   Map<String, dynamic>? paymentData;
   @override
   Widget build(BuildContext context) {
-    final cart = ref.watch(cartProvider);
+    final cart = context.watch<CartProvider>().items;
     double totalPrice =
         cart.fold(0, (sum, item) => sum + item.price); // total cart price
 
@@ -129,20 +129,7 @@ class _ChechoutState extends ConsumerState<Chechout> {
                       icon: Icons.add,
                     ),
                   ),
-                // Container(
-                //   margin: const EdgeInsets.only(top: 40),
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       Label(text: 'Shipping Method'),
-                //       CheckoutAction(
-                //         mainText: 'Pickup at store',
-                //         subText: 'free',
-                //         icon: Ionicons.chevron_down_outline,
-                //       ),
-                //     ],
-                //   ),
-                // ),
+
                 if (paymentData == null)
                   GestureDetector(
                     onTap: () async {
@@ -186,12 +173,12 @@ class _ChechoutState extends ConsumerState<Chechout> {
                               // card Logo
                               if (paymentData?['cardBrand'] == 'Master Card')
                                 Image.asset(
-                                  'assets/logo/masterCard.png',
+                                  'assets/cover/masterCard.png',
                                   height: 50,
                                 ),
                               if (paymentData?['cardBrand'] == 'Visa Card')
                                 Image.asset(
-                                  'assets/logo/visaCard.png',
+                                  'assets/cover/visaCard.png',
                                   height: 50,
                                 ),
                               Gap(20),

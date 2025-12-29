@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:open_fashion/providers/cart_provider.dart';
+import 'package:open_fashion/providers/fav_provider.dart';
 import 'package:open_fashion/routes/app_router.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => FavoriteProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

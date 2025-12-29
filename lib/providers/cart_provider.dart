@@ -1,55 +1,50 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 import 'package:open_fashion/models/product.dart';
 
-// ------------------- Main Provider -------------------
-class CartNotifier extends Notifier<List<Product>> {
-  @override
-  List<Product> build() => [];
+class CartProvider extends ChangeNotifier {
+  final List<Product> _items = [];
 
-  void addCartItem(Product product) {
-    state = [...state, product];
+  // ---------- GETTERS ----------
+  List<Product> get items => List.unmodifiable(_items);
+
+  double get totalPrice => _items.fold(0.0, (sum, item) => sum + item.price);
+
+  List<Map<String, dynamic>> get groupedItems {
+    final Map<int, List<Product>> groupedMap = {};
+
+    for (var item in _items) {
+      groupedMap.putIfAbsent(item.id, () => []).add(item);
+    }
+
+    return groupedMap.entries.map((entry) {
+      return {
+        'product': entry.value.first,
+        'count': entry.value.length,
+      };
+    }).toList();
   }
 
-  void clearCartItems() {
-    state = [];
+  // ---------- ACTIONS ----------
+  void addCartItem(Product product) {
+    _items.add(product);
+    notifyListeners();
   }
 
   void removeCartItem(Product product) {
-    final index = state.indexWhere((item) => item.id == product.id);
+    final index = _items.indexWhere((item) => item.id == product.id);
     if (index != -1) {
-      state = [...state]..removeAt(index);
+      _items.removeAt(index);
+      notifyListeners();
     }
   }
 
   void removeAllOfProduct(int productId) {
-    state = state.where((item) => item.id != productId).toList();
+    _items.removeWhere((item) => item.id == productId);
+    notifyListeners();
+  }
+
+  void clearCartItems() {
+    _items.clear();
+    notifyListeners();
   }
 }
-
-final cartProvider = NotifierProvider<CartNotifier, List<Product>>(
-  () => CartNotifier(),
-);
-
-// ------------------- duplicates handler Provider -------------------
-
-final groupedCartProvider = Provider<List<Map<String, dynamic>>>((ref) {
-  final cart = ref.watch(cartProvider);
-
-  final Map<int, List<Product>> groupedMap = {};
-  for (var item in cart) {
-    groupedMap.putIfAbsent(item.id, () => []).add(item);
-  }
-
-  return groupedMap.entries.map((entry) {
-    return {
-      'product': entry.value.first,
-      'count': entry.value.length,
-    };
-  }).toList();
-});
-
-// ------------------- total price Provider -------------------
-final cartTotalProvider = Provider<double>((ref) {
-  final cart = ref.watch(cartProvider);
-  return cart.fold(0.0, (sum, item) => sum + item.price);
-});

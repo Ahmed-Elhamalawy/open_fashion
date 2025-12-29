@@ -100,6 +100,15 @@ class _AddCardState extends State<AddCard> {
                       cardHolderDecoration: InputDecoration(
                           labelText: 'Name on Card',
                           labelStyle: TextStyle(color: Colors.white)),
+                      // Add these properties to change the input text color:
+                      cardNumberTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                      expiryDateTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                      cvvCodeTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                      cardHolderTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                   Gap(20),
