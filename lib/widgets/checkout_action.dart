@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:open_fashion/components/custome-text.dart';
+import 'package:open_fashion/widgets/custome-text.dart';
 
 class CheckoutAction extends StatelessWidget {
   const CheckoutAction({
@@ -30,7 +30,6 @@ class CheckoutAction extends StatelessWidget {
             color: Colors.grey.shade800,
             fontWeight: FontWeight.w600,
           ),
-
           Row(
             children: [
               if (subText != null) ...[

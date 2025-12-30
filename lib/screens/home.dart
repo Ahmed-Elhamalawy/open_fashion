@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:open_fashion/components/custom_app_bar.dart';
-import 'package:open_fashion/components/header.dart';
-import 'package:open_fashion/components/no_products_widget.dart';
-import 'package:open_fashion/components/product_card.dart';
-import 'package:open_fashion/components/shimmer_grid.dart';
-import 'package:open_fashion/core/colors.dart';
+import 'package:open_fashion/widgets/custom_app_bar.dart';
+import 'package:open_fashion/widgets/header.dart';
+import 'package:open_fashion/widgets/no_products_widget.dart';
+import 'package:open_fashion/widgets/product_card.dart';
+import 'package:open_fashion/widgets/product_card_skeleton.dart';
+import 'package:open_fashion/constants/colors.dart';
 import 'package:open_fashion/models/product.dart';
 import 'package:open_fashion/providers/cart_provider.dart';
 import 'package:open_fashion/providers/fav_provider.dart';
 import 'package:open_fashion/routes/route_names.dart';
-import 'package:open_fashion/services/products.dart';
+import 'package:open_fashion/services/product_service.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -41,6 +41,7 @@ class _HomeState extends State<Home> {
   Future<void> _fetchProducts() async {
     try {
       final result = await _api.getAllProducts();
+      await Future.delayed(const Duration(seconds: 2));
       setState(() {
         _products = result;
         _isLoading = false;
@@ -117,7 +118,22 @@ class _HomeState extends State<Home> {
 
               /// Products Grid
               if (_isLoading)
-                const ShimmerGrid()
+                // const ProductCardSkeleton()
+                GridView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 6,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 15,
+                    mainAxisSpacing: 15,
+                    childAspectRatio: 0.7,
+                  ),
+                  itemBuilder: (context, index) {
+                    return const ProductCardSkeleton();
+                  },
+                )
               else if (_error != null)
                 Center(
                   child: Padding(

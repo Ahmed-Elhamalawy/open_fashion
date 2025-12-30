@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:open_fashion/components/custome-text.dart';
-import 'package:open_fashion/components/header.dart';
-import 'package:open_fashion/components/product_card.dart';
+import 'package:open_fashion/widgets/custome-text.dart';
+import 'package:open_fashion/widgets/header.dart';
+import 'package:open_fashion/widgets/product_card.dart';
 import 'package:open_fashion/models/product.dart';
 import 'package:open_fashion/providers/cart_provider.dart';
 import 'package:open_fashion/providers/fav_provider.dart';
 import 'package:open_fashion/routes/route_names.dart';
-import 'package:open_fashion/services/products.dart';
+import 'package:open_fashion/services/product_service.dart';
 import 'package:provider/provider.dart';
 
 class Category extends StatefulWidget {

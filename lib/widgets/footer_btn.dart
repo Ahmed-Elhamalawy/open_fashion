@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:open_fashion/components/custome-text.dart';
+import 'package:open_fashion/widgets/custome-text.dart';
 
 class FooterBtn extends StatelessWidget {
   const FooterBtn(

@@ -33,8 +33,9 @@ class ProductCard extends StatelessWidget {
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16),
                   ),
-                  child: Image.network(
-                    product.image,
+                  child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/images/productPlaceHolder.png',
+                    image: product.image,
                     width: double.infinity,
                     fit: BoxFit.contain,
                   ),

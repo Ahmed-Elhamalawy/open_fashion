@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:open_fashion/components/custom_bottom_tab_bar.dart';
+import 'package:open_fashion/widgets/custom_bottom_tab_bar.dart';
 import 'package:open_fashion/screens/add_card.dart';
 import 'package:open_fashion/screens/adress.dart';
 import 'package:open_fashion/screens/cart.dart';

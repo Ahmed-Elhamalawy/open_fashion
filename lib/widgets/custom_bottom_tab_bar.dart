@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:open_fashion/components/tab_item.dart';
+import 'package:open_fashion/widgets/tab_item.dart';
 import 'package:open_fashion/routes/route_names.dart';
 
 class CustomBottomTabBar extends StatelessWidget {

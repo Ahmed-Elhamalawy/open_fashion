@@ -6,8 +6,8 @@ import 'package:ionicons/ionicons.dart';
 import 'package:open_fashion/providers/cart_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'package:open_fashion/components/custome-text.dart';
-import 'package:open_fashion/components/footer_btn.dart';
+import 'package:open_fashion/widgets/custome-text.dart';
+import 'package:open_fashion/widgets/footer_btn.dart';
 import 'package:open_fashion/routes/route_names.dart';
 
 class Cart extends StatelessWidget {

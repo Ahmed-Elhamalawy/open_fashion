@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:open_fashion/components/custome-text.dart';
+import 'package:open_fashion/widgets/custome-text.dart';
 
 class Label extends StatelessWidget {
   const Label({super.key, required this.text});

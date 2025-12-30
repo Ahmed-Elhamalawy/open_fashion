@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:open_fashion/components/footer_btn.dart';
-import 'package:open_fashion/components/header.dart';
-import 'package:open_fashion/components/text_input.dart';
+import 'package:open_fashion/widgets/footer_btn.dart';
+import 'package:open_fashion/widgets/header.dart';
+import 'package:open_fashion/widgets/text_input.dart';
 
 class Adress extends StatefulWidget {
   const Adress({super.key});

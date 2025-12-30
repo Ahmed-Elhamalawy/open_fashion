@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import '../components/custome-text.dart';
+import 'custome-text.dart';
 
 class NoProductsWidget extends StatelessWidget {
   const NoProductsWidget({

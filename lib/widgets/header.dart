@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:open_fashion/components/custome-text.dart';
+import 'package:open_fashion/widgets/custome-text.dart';
 
 class Header extends StatelessWidget {
   const Header({super.key, required this.title});
