@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:open_fashion/widgets/footer_btn.dart';
 import 'package:open_fashion/widgets/header.dart';
-import 'package:open_fashion/widgets/text_input.dart';
+import 'package:open_fashion/widgets/form_text_field.dart';
 
 class Adress extends StatefulWidget {
   const Adress({super.key});
@@ -50,14 +50,14 @@ class _AdressState extends State<Adress> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Row(
                 children: [
-                  TextInput(
+                  CustomFormTextField(
                     text: 'First Name',
                     validator: (value) => check('First Name', value),
                     screenWidthFactor: 0.42,
                     onSaved: (value) => _firstName = value!,
                   ),
                   Gap(20),
-                  TextInput(
+                  CustomFormTextField(
                     text: 'Last Name',
                     validator: (value) => check('Last Name', value),
                     screenWidthFactor: 0.42,
@@ -66,14 +66,14 @@ class _AdressState extends State<Adress> {
                 ],
               ),
             ),
-            TextInput(
+            CustomFormTextField(
               text: 'Adress',
               validator: (value) => check('Adress', value),
               screenWidthFactor: 0.9,
               onSaved: (value) => _adress = value!,
             ),
             Gap(20),
-            TextInput(
+            CustomFormTextField(
               text: 'City',
               validator: (value) => check('City', value),
               screenWidthFactor: 0.9,
@@ -86,14 +86,14 @@ class _AdressState extends State<Adress> {
               ),
               child: Row(
                 children: [
-                  TextInput(
+                  CustomFormTextField(
                     text: 'State',
                     validator: (value) => check('State', value),
                     screenWidthFactor: 0.42,
                     onSaved: (value) => _state = value!,
                   ),
                   Gap(20),
-                  TextInput(
+                  CustomFormTextField(
                     text: 'ZIP code',
                     validator: (value) => check('ZIP code', value),
                     screenWidthFactor: 0.42,
@@ -103,7 +103,7 @@ class _AdressState extends State<Adress> {
               ),
             ),
             Gap(20),
-            TextInput(
+            CustomFormTextField(
               text: 'Phone number',
               validator: (value) => check('Phone number', value),
               keyboardType: TextInputType.phone,

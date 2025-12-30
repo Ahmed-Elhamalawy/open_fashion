@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 
-class TextInput extends StatelessWidget {
-  const TextInput({
+class CustomFormTextField extends StatelessWidget {
+  //properties
+  final String text;
+  final bool? ispassword;
+  final TextEditingController? controller;
+  final double? screenWidthFactor;
+  final String? Function(String?)? validator;
+  final TextInputType keyboardType;
+  final void Function(String?)? onSaved;
+  final void Function(String)? onChanged;
+
+//constructor
+  const CustomFormTextField({
     super.key,
     required this.text,
     this.screenWidthFactor,
@@ -9,25 +20,22 @@ class TextInput extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.onSaved,
     this.onChanged,
+    this.controller,
+    this.ispassword = false,
   });
-
-  final String text;
-  final double? screenWidthFactor;
-  final String? Function(String?)? validator;
-  final TextInputType keyboardType;
-  final void Function(String?)? onSaved;
-  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * (screenWidthFactor ?? 1),
       child: TextFormField(
+        obscureText: ispassword ?? false,
         style: TextStyle(color: Colors.white),
         onChanged: onChanged,
         onSaved: onSaved,
         validator: validator,
         keyboardType: keyboardType,
+        controller: controller,
         decoration: InputDecoration(
           labelText: text,
 

@@ -1,32 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:open_fashion/routes/route_names.dart';
 import 'package:open_fashion/services/auth_service.dart';
 import 'package:open_fashion/widgets/custome-text.dart';
 import 'package:open_fashion/widgets/form_text_field.dart';
 import 'package:open_fashion/widgets/header.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class SignIn extends StatefulWidget {
+  const SignIn({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignInState extends State<SignIn> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  String? errorFeedback;
+
+  String? errorFeedback = null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Ionicons.chevron_back_circle,
+            color: Colors.white,
+            size: 30,
+          ),
+          onPressed: () => context.pop(),
+        ),
         backgroundColor: Colors.black,
         title: Header(
-          title: 'Create New Account',
+          title: 'Login to your account',
         ),
       ),
       body: Padding(
@@ -64,12 +74,12 @@ class _SignUpState extends State<SignUp> {
                 },
               ),
               SizedBox(height: 50),
+
               if (errorFeedback != null)
                 CustomeText(
                   text: errorFeedback!,
                   fontSize: 16,
                   color: Colors.red,
-                  fontWeight: FontWeight.w800,
                 ),
               //sign up button
               ElevatedButton(
@@ -78,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                   minimumSize: const Size.fromHeight(50),
                 ),
                 child: const Text(
-                  'Create',
+                  'Login',
                   style: TextStyle(color: Colors.black),
                 ),
                 onPressed: () async {
@@ -88,31 +98,26 @@ class _SignUpState extends State<SignUp> {
                     });
                     final email = _emailController.text.trim();
                     final password = _passwordController.text.trim();
-                    final user = await AuthService.signUp(email, password);
+                    final user = await AuthService.signIn(email, password);
 
-                    //error feedback
+                    if (user != null) {
+                      context.go(RouteNames.home);
+                    }
+
+                    // error feedback
                     if (user == null) {
                       setState(() {
-                        errorFeedback = 'Email already exists';
+                        errorFeedback = 'Invalid email or password';
                       });
                     }
                   }
                 },
               ),
-              SizedBox(height: 50),
-              CustomeText(
-                text: 'Already have an account?',
-                fontSize: 16,
-                color: Color.fromRGBO(136, 136, 136, 1),
-                fontWeight: FontWeight.w800,
-              ),
               TextButton(
-                onPressed: () {
-                  context.push(RouteNames.signin);
+                onPressed: () async {
+                  await AuthService.signOut();
                 },
-                child: CustomeText(
-                  text: 'Sign In instead',
-                ),
+                child: Text('logout'),
               )
             ],
           ),

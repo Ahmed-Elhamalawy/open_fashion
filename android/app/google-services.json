@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "613197314752",
+    "project_id": "flutter-auth-shopping",
+    "storage_bucket": "flutter-auth-shopping.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613197314752:android:dd6144d1d84640edbb8b25",
+        "android_client_info": {
+          "package_name": "com.example.open_fashion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhss25Rz6DXgasutu_WGrRJE6JlBobeHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

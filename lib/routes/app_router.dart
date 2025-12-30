@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:open_fashion/screens/auth/signin.dart';
+import 'package:open_fashion/screens/auth/signup.dart';
 import 'package:open_fashion/widgets/custom_bottom_tab_bar.dart';
 import 'package:open_fashion/screens/add_card.dart';
 import 'package:open_fashion/screens/adress.dart';
@@ -13,7 +15,7 @@ import 'route_names.dart';
 
 class AppRouter {
   static final router = GoRouter(
-    initialLocation: RouteNames.home,
+    initialLocation: RouteNames.signup,
     routes: [
       ShellRoute(
         builder: (context, state, child) {
@@ -73,6 +75,16 @@ class AppRouter {
           final id = state.pathParameters['id']!;
           return ProductDetails(id: id);
         },
+      ),
+
+      //auth
+      GoRoute(
+        path: RouteNames.signup,
+        builder: (context, state) => const SignUp(),
+      ),
+      GoRoute(
+        path: RouteNames.signin,
+        builder: (context, state) => const SignIn(),
       ),
     ],
   );

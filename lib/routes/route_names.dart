@@ -7,4 +7,7 @@ class RouteNames {
   static const String favorite = '/favorite';
   static const String productDetails = '/productDetails';
   static const String category = '/category';
+  //auth
+  static const String signin = '/signin';
+  static const String signup = '/signup';
 }
