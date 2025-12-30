@@ -12,7 +12,7 @@ class CustomBottomTabBar extends StatelessWidget {
 
     if (location == '/favorite') return 2;
     if (location == '/profile') return 3;
-    if (location == '/grid') return 1;
+    if (location == '/category') return 1;
     if (location == '/') return 0;
 
     return 0;
@@ -46,7 +46,9 @@ class CustomBottomTabBar extends StatelessWidget {
           TabItem(
             icon: Ionicons.grid,
             active: currentIndex == 1,
-            onTap: () {},
+            onTap: () {
+              context.go(RouteNames.category);
+            },
           ),
           TabItem(
             icon: Ionicons.heart,

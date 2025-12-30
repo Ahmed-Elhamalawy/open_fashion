@@ -11,6 +11,7 @@ import 'package:open_fashion/components/shimmer_grid.dart';
 import 'package:open_fashion/core/colors.dart';
 import 'package:open_fashion/models/product.dart';
 import 'package:open_fashion/providers/cart_provider.dart';
+import 'package:open_fashion/providers/fav_provider.dart';
 import 'package:open_fashion/routes/route_names.dart';
 import 'package:open_fashion/services/products.dart';
 import 'package:provider/provider.dart';
@@ -94,71 +95,84 @@ class _HomeState extends State<Home> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Gap(15),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const Gap(15),
 
-                /// Cover Image
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset('assets/images/cover3.png'),
+              /// Cover Image
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(10),
+              //   child: Image.asset('assets/images/cover3.png'),
+              // ),
+              const Gap(15),
+
+              const Center(child: Header(title: 'Explore All Products')),
+              Center(
+                child: Image.asset(
+                  'assets/images/line.png',
+                  width: 200,
                 ),
-                const Gap(15),
+              ),
+              const Gap(20),
 
-                const Center(child: Header(title: 'Explore All Products')),
+              /// Products Grid
+              if (_isLoading)
+                const ShimmerGrid()
+              else if (_error != null)
                 Center(
-                  child: Image.asset(
-                    'assets/images/line.png',
-                    width: 200,
+                  child: Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: Text(
+                      'Error: $_error',
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ),
-                ),
-                const Gap(20),
-
-                /// Products Grid
-                if (_isLoading)
-                  const ShimmerGrid()
-                else if (_error != null)
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(40.0),
-                      child: Text(
-                        'Error: $_error',
-                        style: const TextStyle(color: Colors.white),
+                )
+              else if (filteredProducts.isEmpty)
+                const NoProductsWidget()
+              else
+                GridView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: filteredProducts.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 15,
+                    mainAxisSpacing: 15,
+                    childAspectRatio: 0.7,
+                  ),
+                  itemBuilder: (context, index) {
+                    final product = filteredProducts[index];
+                    return GestureDetector(
+                      onTap: () {
+                        context.goNamed(
+                          RouteNames.productDetails,
+                          pathParameters: {'id': product.id.toString()},
+                        );
+                      },
+                      child: ProductCard(
+                        isFav: context.watch<FavoriteProvider>().isFav(product),
+                        product: product,
+                        onFavoritePressed: () {
+                          context.read<FavoriteProvider>().toggleFav(product);
+                        },
+                        onCartPressed: () {
+                          context.read<CartProvider>().addCartItem(product);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('${product.title} added to cart'),
+                              duration: const Duration(seconds: 1),
+                              backgroundColor: Colors.green.shade700,
+                            ),
+                          );
+                        },
                       ),
-                    ),
-                  )
-                else if (filteredProducts.isEmpty)
-                  const NoProductsWidget()
-                else
-                  GridView.builder(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: filteredProducts.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 15,
-                      mainAxisSpacing: 15,
-                      childAspectRatio: 0.53,
-                    ),
-                    itemBuilder: (context, index) {
-                      final item = filteredProducts[index];
-                      return GestureDetector(
-                          onTap: () {
-                            context.goNamed(
-                              RouteNames.productDetails,
-                              pathParameters: {'id': item.id.toString()},
-                            );
-                          },
-                          child: ProductCard(product: item));
-                    },
-                  ),
-
-                const Gap(15),
-              ],
-            ),
+                    );
+                  },
+                ),
+              Gap(40)
+            ]),
           ),
         ),
       ),

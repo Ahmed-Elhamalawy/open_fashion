@@ -14,7 +14,7 @@ class ShimmerGrid extends StatelessWidget {
     this.crossAxisCount = 2,
     this.crossAxisSpacing = 15,
     this.mainAxisSpacing = 15,
-    this.childAspectRatio = 0.53,
+    this.childAspectRatio = 0.5,
   });
 
   @override
@@ -23,7 +23,6 @@ class ShimmerGrid extends StatelessWidget {
       baseColor: Colors.grey.shade800,
       highlightColor: Colors.grey.shade700,
       child: GridView.builder(
-        padding: EdgeInsets.zero,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: itemCount,

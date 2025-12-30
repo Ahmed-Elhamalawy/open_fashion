@@ -4,6 +4,7 @@ import 'package:open_fashion/components/custom_bottom_tab_bar.dart';
 import 'package:open_fashion/screens/add_card.dart';
 import 'package:open_fashion/screens/adress.dart';
 import 'package:open_fashion/screens/cart.dart';
+import 'package:open_fashion/screens/category_screen.dart';
 import 'package:open_fashion/screens/chechout.dart';
 import 'package:open_fashion/screens/favorite.dart';
 import 'package:open_fashion/screens/home.dart';
@@ -36,6 +37,10 @@ class AppRouter {
           GoRoute(
             path: RouteNames.home,
             builder: (context, state) => const Home(),
+          ),
+          GoRoute(
+            path: RouteNames.category,
+            builder: (context, state) => const Category(),
           ),
           GoRoute(
             path: RouteNames.favorite,
