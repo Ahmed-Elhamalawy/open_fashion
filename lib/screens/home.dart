@@ -1,4 +1,5 @@
 // ignore_for_file: deprecated_member_use
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -26,6 +27,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final TextEditingController _searchController = TextEditingController();
   final ProductsApi _api = ProductsApi();
+  final user = FirebaseAuth.instance.currentUser;
+  late final email = user?.email;
 
   List<Product> _products = [];
   bool _isLoading = true;
@@ -98,15 +101,7 @@ class _HomeState extends State<Home> {
           child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Gap(15),
-
-              /// Cover Image
-              // ClipRRect(
-              //   borderRadius: BorderRadius.circular(10),
-              //   child: Image.asset('assets/images/cover3.png'),
-              // ),
-              const Gap(15),
-
+              const Gap(20),
               const Center(child: Header(title: 'Explore All Products')),
               Center(
                 child: Image.asset(
@@ -118,7 +113,6 @@ class _HomeState extends State<Home> {
 
               /// Products Grid
               if (_isLoading)
-                // const ProductCardSkeleton()
                 GridView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,

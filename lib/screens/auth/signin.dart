@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:open_fashion/routes/route_names.dart';
 import 'package:open_fashion/services/auth_service.dart';
 import 'package:open_fashion/widgets/custome-text.dart';
@@ -19,21 +18,13 @@ class _SignInState extends State<SignIn> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  String? errorFeedback = null;
+  String? errorFeedback;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Ionicons.chevron_back_circle,
-            color: Colors.white,
-            size: 30,
-          ),
-          onPressed: () => context.pop(),
-        ),
         backgroundColor: Colors.black,
         title: Header(
           title: 'Login to your account',
@@ -100,10 +91,6 @@ class _SignInState extends State<SignIn> {
                     final password = _passwordController.text.trim();
                     final user = await AuthService.signIn(email, password);
 
-                    if (user != null) {
-                      context.go(RouteNames.home);
-                    }
-
                     // error feedback
                     if (user == null) {
                       setState(() {
@@ -113,11 +100,20 @@ class _SignInState extends State<SignIn> {
                   }
                 },
               ),
+              SizedBox(height: 50),
+              CustomeText(
+                text: 'Dont have an account?',
+                fontSize: 16,
+                color: Color.fromRGBO(136, 136, 136, 1),
+                fontWeight: FontWeight.w800,
+              ),
               TextButton(
-                onPressed: () async {
-                  await AuthService.signOut();
+                onPressed: () {
+                  context.push(RouteNames.signup);
                 },
-                child: Text('logout'),
+                child: CustomeText(
+                  text: 'Create new account',
+                ),
               )
             ],
           ),

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:open_fashion/routes/route_names.dart';
+import 'package:open_fashion/services/auth_service.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -127,6 +128,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
           ),
+          const SizedBox(width: 12),
+          IconButton(
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+              size: 28,
+            ),
+            onPressed: () async {
+              await AuthService.signOut();
+            },
+          )
         ],
       ),
     );

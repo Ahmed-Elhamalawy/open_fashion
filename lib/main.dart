@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:open_fashion/providers/cart_provider.dart';
 import 'package:open_fashion/providers/fav_provider.dart';
 import 'package:open_fashion/routes/app_router.dart';
-import 'package:open_fashion/screens/auth/signin.dart';
-import 'package:open_fashion/screens/auth/signup.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

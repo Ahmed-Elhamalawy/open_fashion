@@ -78,7 +78,7 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '\$${product.price}',
+                      '${product.price} EGP',
                       style: TextStyle(
                         color: Colors.green.shade400,
                         fontWeight: FontWeight.bold,

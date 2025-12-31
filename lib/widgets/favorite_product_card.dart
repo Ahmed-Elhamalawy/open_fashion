@@ -118,11 +118,11 @@ class FavoriteProductCard extends StatelessWidget {
                         children: [
                           // Price
                           Text(
-                            '\$${product.price}',
+                            '${product.price} EGP',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.red.shade300,
+                              color: Colors.green.shade300,
                             ),
                           ),
 
